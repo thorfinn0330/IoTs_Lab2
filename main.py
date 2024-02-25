@@ -2,7 +2,8 @@ import sys
 import time
 import random
 from Adafruit_IO import MQTTClient
-from simple_ai import*
+from simple_ai import *
+from uart import *
 
 AIO_FEED_ID = ["nutnhan1", "nutnhan2"]
 AIO_USERNAME = "thorfinn0330"
@@ -37,16 +38,16 @@ ai_result =""
 pre_ai_result =""
 
 while True:
-    counter = counter - 1
-    if counter <= 0:
-        print("Data is publishing....")
-        temp = random.randint(10, 30)
-        client.publish("cambien1", temp)
-        light = random.randint(100, 500)
-        client.publish("cambien2", light)
-        humi = random.randint(30, 60)
-        client.publish("cambien3", humi)
-        counter = 10
+    # counter = counter - 1
+    # if counter <= 0:
+    #     print("Data is publishing....")
+    #     temp = random.randint(10, 30)
+    #     client.publish("cambien1", temp)
+    #     light = random.randint(100, 500)
+    #     client.publish("cambien2", light)
+    #     humi = random.randint(30, 60)
+    #     client.publish("cambien3", humi)
+    #     counter = 10
     detect_counter = detect_counter - 1
     if detect_counter <= 0:
         detect_counter = 5
@@ -56,5 +57,6 @@ while True:
         if ai_result != pre_ai_result:
             client.publish("ai", ai_result)
 
+    readSerial(client)
     time.sleep(1)
     
