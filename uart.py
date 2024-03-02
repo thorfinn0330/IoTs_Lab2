@@ -10,7 +10,9 @@ def getPort():
         if "USB Serial Device" in strPort:
             splitPort = strPort.split(" ")
             commPort = (splitPort[0])
-    return "COM9"
+    #return port
+    #return "COM9"
+    return '/dev/pts/11'
 
 
 if getPort() != "None":
@@ -28,6 +30,7 @@ def processData(client, data):
         client.publish("cambien2", splitData[2])
     elif splitData[1] == "H":
         client.publish("cambien3", splitData[2])
+    
 
 mess = ""
 def readSerial(client):

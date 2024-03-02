@@ -13,6 +13,11 @@ class_names = ["Không Khẩu Trang", "Đeo Khẩu Trang", "Không Có Người"
 
 # CAMERA can be 0 or 1 based on default camera of your computer
 camera = cv2.VideoCapture(0)
+camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+def show_image():
+    ret, image = camera.read()
+    cv2.imshow("Webcam Image", image)
+
 
 def image_detector():
     # Grab the webcamera's image.
@@ -39,8 +44,6 @@ def image_detector():
     # Print prediction and confidence score
     # print("Class: ", class_name[0:], end="")
     # print("Confidence Score: ", str(np.round(confidence_score * 100))[:-2], "%")
-
+    
     
     return class_name
-
-print(image_detector())
